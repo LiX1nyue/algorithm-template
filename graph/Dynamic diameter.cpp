@@ -5,10 +5,10 @@ using namespace std;
 typedef pair<int,int> PII;
 struct info{
 	int l,r;
-	/*ÌîÈëĞèÒªÎ¬»¤µÄÄÚÈİ*/
+	/*å¡«å…¥éœ€è¦ç»´æŠ¤çš„å†…å®¹*/
 	tuple<int,int,int> ans;
-	tuple<int,int> ltmp,rtmp; //µÚ¶şÎ¬ÊÇÈ¡×î´óÖµµÄµã
-	tuple<int,int> mx,mi; //µÚ¶şÎ¬È¡×î´óÖµµÄµã
+	tuple<int,int> ltmp,rtmp; //ç¬¬äºŒç»´æ˜¯å–æœ€å¤§å€¼çš„ç‚¹
+	tuple<int,int> mx,mi; //ç¬¬äºŒç»´å–æœ€å¤§å€¼çš„ç‚¹
 	//info(){}
 	//info(int nl,int nr){l = nl,r = nr,ans = 0,ltmp = 0,rtmp = 0,mx = 0,mi = 0;}
 };
@@ -52,7 +52,7 @@ struct Segtree{
 	}
 	void add(int np,int v)
 	{
-		/*µ¥µãĞŞ¸ÄµÄ·½Ê½*/
+		/*å•ç‚¹ä¿®æ”¹çš„æ–¹å¼*/
 		get<0>(seg[np].mx) += v;
 		get<0>(seg[np].mi) += v;
 		get<0>(seg[np].rtmp) -= v;

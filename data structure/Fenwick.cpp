@@ -32,7 +32,7 @@ struct Fenwick{
 		return sum(r) - sum(l - 1);
 	}
 	
-	//·µ»Øsum <= kµÄ×î¿¿ÓÒÎ»ÖÃ
+	//è¿”å›žsum <= kçš„æœ€é å³ä½ç½®
 	int select(int k){
 		int x = 0,cur = 0;
 		for(int i = 1 << __lg(len); i ; i /= 2){

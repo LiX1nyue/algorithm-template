@@ -5,10 +5,10 @@ using namespace std;
 typedef pair<int,int> PII;
 struct LCA{
 	int n,k,tot;
-	vector<vector<PII>> &v;//ÎŞÈ¨±ßÊ±£¬´Ë´¦¸ÄÎªint
+	vector<vector<PII>> &v;//æ— æƒè¾¹æ—¶ï¼Œæ­¤å¤„æ”¹ä¸ºint
 	vector<int> dfn,depth,pos;
 	vector<array<int,24>> st,idx;
-	LCA(vector<vector<PII>> &g): v(g){//ÎŞÈ¨±ßÊ±£¬´Ë´¦¸ÄÎªint
+	LCA(vector<vector<PII>> &g): v(g){//æ— æƒè¾¹æ—¶ï¼Œæ­¤å¤„æ”¹ä¸ºint
 		n = g.size()-1;
 		k = __lg(2*n+1);
 		pos.resize(n+1);
@@ -23,9 +23,9 @@ struct LCA{
 		dfn[++tot] = u;
 		pos[u] = tot;
 		depth[u] = dis;
-		for(auto [d,i] : v[u]){//ÎŞ±ßÈ¨£¬´Ë´¦¸ÄÎªauto i
+		for(auto [d,i] : v[u]){//æ— è¾¹æƒï¼Œæ­¤å¤„æ”¹ä¸ºauto i
 			if(i != p){
-				dfs(i,u,dis + d);//ÎŞ±ßÈ¨Ê±£¬´Ë´¦¸ÄÎª dis + 1
+				dfs(i,u,dis + d);//æ— è¾¹æƒæ—¶ï¼Œæ­¤å¤„æ”¹ä¸º dis + 1
 				dfn[++tot] = u; 
 			}
 		}

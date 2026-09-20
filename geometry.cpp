@@ -6,13 +6,13 @@ using std::tuple, std::make_tuple;
 using std::vector, std::deque;
 using std::set, std::multiset;
 
-using T=long double;  //È«¾ÖÊı¾İÀàĞÍ
+using T=long double;  //å…¨å±€æ•°æ®ç±»å‹
 
 constexpr T eps=1e-8;
 constexpr T INF=numeric_limits<T>::max();
 constexpr T PI=3.1415926535897932384l;
 
-// µãÓëÏòÁ¿
+// ç‚¹ä¸å‘é‡
 struct Point
 {
     T x,y;
@@ -25,12 +25,12 @@ struct Point
     Point operator-() const {return {-x,-y};}
     Point operator*(const T k) const {return {k*x,k*y};}
     Point operator/(const T k) const {return {x/k,y/k};}
-    T operator*(const Point &a) const {return x*a.x+y*a.y;}  // µã»ı
-    T operator^(const Point &a) const {return x*a.y-y*a.x;}  // ²æ»ı£¬×¢ÒâÓÅÏÈ¼¶
-    int toleft(const Point &a) const {const auto t=(*this)^a; return (t>eps)-(t<-eps);}  // to-left ²âÊÔ
-    T len2() const {return (*this)*(*this);}  // ÏòÁ¿³¤¶ÈµÄÆ½·½
-    T dis2(const Point &a) const {return (a-(*this)).len2();}  // Á½µã¾àÀëµÄÆ½·½
-    int quad() const // ÏóÏŞÅĞ¶Ï 0:Ô­µã 1:xÖáÕı 2:µÚÒ»ÏóÏŞ 3:yÖáÕı 4:µÚ¶şÏóÏŞ 5:xÖá¸º 6:µÚÈıÏóÏŞ 7:yÖá¸º 8:µÚËÄÏóÏŞ
+    T operator*(const Point &a) const {return x*a.x+y*a.y;}  // ç‚¹ç§¯
+    T operator^(const Point &a) const {return x*a.y-y*a.x;}  // å‰ç§¯ï¼Œæ³¨æ„ä¼˜å…ˆçº§
+    int toleft(const Point &a) const {const auto t=(*this)^a; return (t>eps)-(t<-eps);}  // to-left æµ‹è¯•
+    T len2() const {return (*this)*(*this);}  // å‘é‡é•¿åº¦çš„å¹³æ–¹
+    T dis2(const Point &a) const {return (a-(*this)).len2();}  // ä¸¤ç‚¹è·ç¦»çš„å¹³æ–¹
+    int quad() const // è±¡é™åˆ¤æ–­ 0:åŸç‚¹ 1:xè½´æ­£ 2:ç¬¬ä¸€è±¡é™ 3:yè½´æ­£ 4:ç¬¬äºŒè±¡é™ 5:xè½´è´Ÿ 6:ç¬¬ä¸‰è±¡é™ 7:yè½´è´Ÿ 8:ç¬¬å››è±¡é™
     {
         if (abs(x)<=eps && abs(y)<=eps) return 0;
         if (abs(y)<=eps) return x>eps ? 1 : 5;
@@ -38,15 +38,15 @@ struct Point
         return y>eps ? (x>eps ? 2 : 4) : (x>eps ? 8 : 6);
     }
 
-    // ±ØĞëÓÃ¸¡µãÊı
-    T len() const {return sqrtl(len2());}  // ÏòÁ¿³¤¶È
-    T dis(const Point &a) const {return sqrtl(dis2(a));}  // Á½µã¾àÀë
-    T ang(const Point &a) const {return acosl(max(-1.0l,min(1.0l,((*this)*a)/(len()*a.len()))));}  // ÏòÁ¿¼Ğ½Ç
-    Point rot(const T rad) const {return {x*cos(rad)-y*sin(rad),x*sin(rad)+y*cos(rad)};}  // ÄæÊ±ÕëĞı×ª£¨¸ø¶¨½Ç¶È£©
-    Point rot(const T cosr,const T sinr) const {return {x*cosr-y*sinr,x*sinr+y*cosr};}  // ÄæÊ±ÕëĞı×ª£¨¸ø¶¨½Ç¶ÈµÄÕıÏÒÓëÓàÏÒ£©
+    // å¿…é¡»ç”¨æµ®ç‚¹æ•°
+    T len() const {return sqrtl(len2());}  // å‘é‡é•¿åº¦
+    T dis(const Point &a) const {return sqrtl(dis2(a));}  // ä¸¤ç‚¹è·ç¦»
+    T ang(const Point &a) const {return acosl(max(-1.0l,min(1.0l,((*this)*a)/(len()*a.len()))));}  // å‘é‡å¤¹è§’
+    Point rot(const T rad) const {return {x*cos(rad)-y*sin(rad),x*sin(rad)+y*cos(rad)};}  // é€†æ—¶é’ˆæ—‹è½¬ï¼ˆç»™å®šè§’åº¦ï¼‰
+    Point rot(const T cosr,const T sinr) const {return {x*cosr-y*sinr,x*sinr+y*cosr};}  // é€†æ—¶é’ˆæ—‹è½¬ï¼ˆç»™å®šè§’åº¦çš„æ­£å¼¦ä¸ä½™å¼¦ï¼‰
 };
 
-// ¼«½ÇÅÅĞò
+// æè§’æ’åº
 struct Argcmp
 {
     bool operator()(const Point &a,const Point &b) const
@@ -54,57 +54,57 @@ struct Argcmp
         const int qa=a.quad(),qb=b.quad();
         if (qa!=qb) return qa<qb;
         const auto t=a^b;
-        // if (abs(t)<=eps) return a*a<b*b-eps;  // ²»Í¬³¤¶ÈµÄÏòÁ¿ĞèÒª·Ö¿ª
+        // if (abs(t)<=eps) return a*a<b*b-eps;  // ä¸åŒé•¿åº¦çš„å‘é‡éœ€è¦åˆ†å¼€
         return t>eps;
     }
 };
 
-// Ö±Ïß
+// ç›´çº¿
 struct Line
 {
-    Point p,v;  // p ÎªÖ±ÏßÉÏÒ»µã£¬v Îª·½ÏòÏòÁ¿
+    Point p,v;  // p ä¸ºç›´çº¿ä¸Šä¸€ç‚¹ï¼Œv ä¸ºæ–¹å‘å‘é‡
 
     bool operator==(const Line &a) const {return v.toleft(a.v)==0 && v.toleft(p-a.p)==0;}
-    int toleft(const Point &a) const {return v.toleft(a-p);}  // to-left ²âÊÔ
-    bool operator<(const Line &a) const  // °ëÆ½Ãæ½»Ëã·¨¶¨ÒåµÄÅÅĞò
+    int toleft(const Point &a) const {return v.toleft(a-p);}  // to-left æµ‹è¯•
+    bool operator<(const Line &a) const  // åŠå¹³é¢äº¤ç®—æ³•å®šä¹‰çš„æ’åº
     {
         if (abs(v^a.v)<=eps && v*a.v>=-eps) return toleft(a.p)==-1;
         return Argcmp()(v,a.v);
     }
 
-    // ±ØĞëÓÃ¸¡µãÊı
-    Point inter(const Line &a) const {return p+v*((a.v^(p-a.p))/(v^a.v));}  // Ö±Ïß½»µã
-    T dis(const Point &a) const {return abs(v^(a-p))/v.len();}  // µãµ½Ö±Ïß¾àÀë
-    Point proj(const Point &a) const {return p+v*((v*(a-p))/(v*v));}  // µãÔÚÖ±ÏßÉÏµÄÍ¶Ó°
+    // å¿…é¡»ç”¨æµ®ç‚¹æ•°
+    Point inter(const Line &a) const {return p+v*((a.v^(p-a.p))/(v^a.v));}  // ç›´çº¿äº¤ç‚¹
+    T dis(const Point &a) const {return abs(v^(a-p))/v.len();}  // ç‚¹åˆ°ç›´çº¿è·ç¦»
+    Point proj(const Point &a) const {return p+v*((v*(a-p))/(v*v));}  // ç‚¹åœ¨ç›´çº¿ä¸Šçš„æŠ•å½±
 };
 
-//Ïß¶Î
+//çº¿æ®µ
 struct Segment
 {
     Point a,b;
 
     bool operator<(const Segment &s) const {return make_pair(a,b)<make_pair(s.a,s.b);}
 
-    // ÅĞ¶¨ĞÔº¯Êı½¨ÒéÔÚÕûÊıÓòÊ¹ÓÃ
+    // åˆ¤å®šæ€§å‡½æ•°å»ºè®®åœ¨æ•´æ•°åŸŸä½¿ç”¨
 
-    // ÅĞ¶ÏµãÊÇ·ñÔÚÏß¶ÎÉÏ
-    // -1 µãÔÚÏß¶Î¶Ëµã | 0 µã²»ÔÚÏß¶ÎÉÏ | 1 µãÑÏ¸ñÔÚÏß¶ÎÉÏ
+    // åˆ¤æ–­ç‚¹æ˜¯å¦åœ¨çº¿æ®µä¸Š
+    // -1 ç‚¹åœ¨çº¿æ®µç«¯ç‚¹ | 0 ç‚¹ä¸åœ¨çº¿æ®µä¸Š | 1 ç‚¹ä¸¥æ ¼åœ¨çº¿æ®µä¸Š
     int is_on(const Point &p) const  
     {
         if (p==a || p==b) return -1;
         return (p-a).toleft(p-b)==0 && (p-a)*(p-b)<-eps;
     }
 
-    // ÅĞ¶ÏÏß¶ÎÖ±ÏßÊÇ·ñÏà½»
-    // -1 Ö±Ïß¾­¹ıÏß¶Î¶Ëµã | 0 Ïß¶ÎºÍÖ±Ïß²»Ïà½» | 1 Ïß¶ÎºÍÖ±ÏßÑÏ¸ñÏà½»
+    // åˆ¤æ–­çº¿æ®µç›´çº¿æ˜¯å¦ç›¸äº¤
+    // -1 ç›´çº¿ç»è¿‡çº¿æ®µç«¯ç‚¹ | 0 çº¿æ®µå’Œç›´çº¿ä¸ç›¸äº¤ | 1 çº¿æ®µå’Œç›´çº¿ä¸¥æ ¼ç›¸äº¤
     int is_inter(const Line &l) const
     {
         if (l.toleft(a)==0 || l.toleft(b)==0) return -1;
         return l.toleft(a)!=l.toleft(b);
     }
     
-    // ÅĞ¶ÏÁ½Ïß¶ÎÊÇ·ñÏà½»
-    // -1 ÔÚÄ³Ò»Ïß¶Î¶Ëµã´¦Ïà½» | 0 Á½Ïß¶Î²»Ïà½» | 1 Á½Ïß¶ÎÑÏ¸ñÏà½»
+    // åˆ¤æ–­ä¸¤çº¿æ®µæ˜¯å¦ç›¸äº¤
+    // -1 åœ¨æŸä¸€çº¿æ®µç«¯ç‚¹å¤„ç›¸äº¤ | 0 ä¸¤çº¿æ®µä¸ç›¸äº¤ | 1 ä¸¤çº¿æ®µä¸¥æ ¼ç›¸äº¤
     int is_inter(const Segment &s) const
     {
         if (is_on(s.a) || is_on(s.b) || s.is_on(a) || s.is_on(b)) return -1;
@@ -112,7 +112,7 @@ struct Segment
         return l.toleft(s.a)*l.toleft(s.b)==-1 && ls.toleft(a)*ls.toleft(b)==-1;
     }
 
-    // µãµ½Ïß¶Î¾àÀë£¨±ØĞëÓÃ¸¡µãÊı£©
+    // ç‚¹åˆ°çº¿æ®µè·ç¦»ï¼ˆå¿…é¡»ç”¨æµ®ç‚¹æ•°ï¼‰
     T dis(const Point &p) const
     {
         if ((p-a)*(b-a)<-eps || (p-b)*(a-b)<-eps) return min(p.dis(a),p.dis(b));
@@ -120,7 +120,7 @@ struct Segment
         return l.dis(p);
     }
 
-    // Á½Ïß¶Î¼ä¾àÀë£¨±ØĞëÓÃ¸¡µãÊı£©
+    // ä¸¤çº¿æ®µé—´è·ç¦»ï¼ˆå¿…é¡»ç”¨æµ®ç‚¹æ•°ï¼‰
     T dis(const Segment &s) const
     {
         if (is_inter(s)) return 0;
@@ -128,17 +128,17 @@ struct Segment
     }
 };
 
-// ¶à±ßĞÎ
+// å¤šè¾¹å½¢
 struct Polygon
 {
-    vector<Point> p;  // ÒÔÄæÊ±ÕëË³Ğò´æ´¢
+    vector<Point> p;  // ä»¥é€†æ—¶é’ˆé¡ºåºå­˜å‚¨
 
     size_t nxt(const size_t i) const {return i==p.size()-1?0:i+1;}
     size_t pre(const size_t i) const {return i==0?p.size()-1:i-1;}
     
-    // »Ø×ªÊı
-    // ·µ»ØÖµµÚÒ»Ïî±íÊ¾µãÊÇ·ñÔÚ¶à±ßĞÎ±ßÉÏ
-    // ¶ÔÓÚÏÁÒå¶à±ßĞÎ£¬»Ø×ªÊıÎª 0 ±íÊ¾µãÔÚ¶à±ßĞÎÍâ£¬·ñÔòµãÔÚ¶à±ßĞÎÄÚ
+    // å›è½¬æ•°
+    // è¿”å›å€¼ç¬¬ä¸€é¡¹è¡¨ç¤ºç‚¹æ˜¯å¦åœ¨å¤šè¾¹å½¢è¾¹ä¸Š
+    // å¯¹äºç‹­ä¹‰å¤šè¾¹å½¢ï¼Œå›è½¬æ•°ä¸º 0 è¡¨ç¤ºç‚¹åœ¨å¤šè¾¹å½¢å¤–ï¼Œå¦åˆ™ç‚¹åœ¨å¤šè¾¹å½¢å†…
     pair<bool,int> winding(const Point &a) const
     {
         int cnt=0;
@@ -156,8 +156,8 @@ struct Polygon
         return {false,cnt};
     }
 
-    // ¶à±ßĞÎÃæ»ıµÄÁ½±¶
-    // ¿ÉÓÃÓÚÅĞ¶ÏµãµÄ´æ´¢Ë³ĞòÊÇË³Ê±Õë»òÄæÊ±Õë
+    // å¤šè¾¹å½¢é¢ç§¯çš„ä¸¤å€
+    // å¯ç”¨äºåˆ¤æ–­ç‚¹çš„å­˜å‚¨é¡ºåºæ˜¯é¡ºæ—¶é’ˆæˆ–é€†æ—¶é’ˆ
     T area() const
     {
         T sum=0;
@@ -165,7 +165,7 @@ struct Polygon
         return sum;
     }
 
-    // ¶à±ßĞÎµÄÖÜ³¤
+    // å¤šè¾¹å½¢çš„å‘¨é•¿
     T circ() const
     {
         T sum=0;
@@ -174,10 +174,10 @@ struct Polygon
     }
 };
 
-//Í¹¶à±ßĞÎ
+//å‡¸å¤šè¾¹å½¢
 struct Convex: Polygon
 {
-    // ãÉ¿É·òË¹»ùºÍ
+    // é—µå¯å¤«æ–¯åŸºå’Œ
     Convex operator+(const Convex &c) const  
     {
         const auto &p=this->p;
@@ -205,8 +205,8 @@ struct Convex: Polygon
         return {res};
     }
 
-    // Ğı×ª¿¨¿Ç
-    // Àı£ºÍ¹¶à±ßĞÎµÄÖ±¾¶µÄÆ½·½
+    // æ—‹è½¬å¡å£³
+    // ä¾‹ï¼šå‡¸å¤šè¾¹å½¢çš„ç›´å¾„çš„å¹³æ–¹
     T rotcaliper() const
     {
         const auto &p=this->p;
@@ -227,9 +227,9 @@ struct Convex: Polygon
         return ans;
     }
     
-    // ÅĞ¶ÏµãÊÇ·ñÔÚÍ¹¶à±ßĞÎÄÚ
-    // ¸´ÔÓ¶È O(logn)
-    // -1 µãÔÚ¶à±ßĞÎ±ßÉÏ | 0 µãÔÚ¶à±ßĞÎÍâ | 1 µãÔÚ¶à±ßĞÎÄÚ
+    // åˆ¤æ–­ç‚¹æ˜¯å¦åœ¨å‡¸å¤šè¾¹å½¢å†…
+    // å¤æ‚åº¦ O(logn)
+    // -1 ç‚¹åœ¨å¤šè¾¹å½¢è¾¹ä¸Š | 0 ç‚¹åœ¨å¤šè¾¹å½¢å¤– | 1 ç‚¹åœ¨å¤šè¾¹å½¢å†…
     int is_in(const Point &a) const
     {
         const auto &p=this->p;
@@ -245,9 +245,9 @@ struct Convex: Polygon
         return (p[i]-p[i-1]).toleft(a-p[i-1])>0;
     }
 
-    // Í¹¶à±ßĞÎ¹ØÓÚÄ³Ò»·½ÏòµÄ¼«µã
-    // ¸´ÔÓ¶È O(logn)
-    // ²Î¿¼×ÊÁÏ£ºhttps://codeforces.com/blog/entry/48868
+    // å‡¸å¤šè¾¹å½¢å…³äºæŸä¸€æ–¹å‘çš„æç‚¹
+    // å¤æ‚åº¦ O(logn)
+    // å‚è€ƒèµ„æ–™ï¼šhttps://codeforces.com/blog/entry/48868
     template<typename F> size_t extreme(const F &dir) const
     {
         const auto &p=this->p;
@@ -266,9 +266,9 @@ struct Convex: Polygon
         return partition_point(p.begin(),p.end(),cmp)-p.begin();
     }
 
-    // ¹ıÍ¹¶à±ßĞÎÍâÒ»µãÇóÍ¹¶à±ßĞÎµÄÇĞÏß£¬·µ»ØÇĞµãÏÂ±ê
-    // ¸´ÔÓ¶È O(logn)
-    // ±ØĞë±£Ö¤µãÔÚ¶à±ßĞÎÍâ
+    // è¿‡å‡¸å¤šè¾¹å½¢å¤–ä¸€ç‚¹æ±‚å‡¸å¤šè¾¹å½¢çš„åˆ‡çº¿ï¼Œè¿”å›åˆ‡ç‚¹ä¸‹æ ‡
+    // å¤æ‚åº¦ O(logn)
+    // å¿…é¡»ä¿è¯ç‚¹åœ¨å¤šè¾¹å½¢å¤–
     pair<size_t,size_t> tangent(const Point &a) const
     {
         const size_t i=extreme([&](const Point &u){return u-a;});
@@ -276,8 +276,8 @@ struct Convex: Polygon
         return {i,j};
     }
 
-    // ÇóÆ½ĞĞÓÚ¸ø¶¨Ö±ÏßµÄÍ¹¶à±ßĞÎµÄÇĞÏß£¬·µ»ØÇĞµãÏÂ±ê
-    // ¸´ÔÓ¶È O(logn)
+    // æ±‚å¹³è¡Œäºç»™å®šç›´çº¿çš„å‡¸å¤šè¾¹å½¢çš„åˆ‡çº¿ï¼Œè¿”å›åˆ‡ç‚¹ä¸‹æ ‡
+    // å¤æ‚åº¦ O(logn)
     pair<size_t,size_t> tangent(const Line &a) const
     {
         const size_t i=extreme([&](...){return a.v;});
@@ -286,22 +286,22 @@ struct Convex: Polygon
     }
 };
 
-// Ô²
+// åœ†
 struct Circle
 {
     Point c;
-    T r; // Ò»°ãÀ´Ëµ±ØĞëÓÃ¸¡µãÊı
+    T r; // ä¸€èˆ¬æ¥è¯´å¿…é¡»ç”¨æµ®ç‚¹æ•°
 
     bool operator==(const Circle &a) const {return c==a.c && abs(r-a.r)<=eps;}
-    T circ() const {return 2*PI*r;}  // ÖÜ³¤
-    T area() const {return PI*r*r;}  // Ãæ»ı
+    T circ() const {return 2*PI*r;}  // å‘¨é•¿
+    T area() const {return PI*r*r;}  // é¢ç§¯
 
-    // µãÓëÔ²µÄ¹ØÏµ
-    // -1 Ô²ÉÏ | 0 Ô²Íâ | 1 Ô²ÄÚ
+    // ç‚¹ä¸åœ†çš„å…³ç³»
+    // -1 åœ†ä¸Š | 0 åœ†å¤– | 1 åœ†å†…
     int is_in(const Point &p) const {const T d=p.dis(c); return abs(d-r)<=eps?-1:d<r-eps;}
 
-    // Ö±ÏßÓëÔ²¹ØÏµ
-    // 0 ÏàÀë | 1 ÏàÇĞ | 2 Ïà½»
+    // ç›´çº¿ä¸åœ†å…³ç³»
+    // 0 ç›¸ç¦» | 1 ç›¸åˆ‡ | 2 ç›¸äº¤
     int relation(const Line &l) const
     {
         const T d=l.dis(c);
@@ -310,8 +310,8 @@ struct Circle
         return 2;
     }
 
-    // Ô²ÓëÔ²¹ØÏµ
-    // -1 ÏàÍ¬ | 0 ÏàÀë | 1 ÍâÇĞ | 2 Ïà½» | 3 ÄÚÇĞ | 4 ÄÚº¬
+    // åœ†ä¸åœ†å…³ç³»
+    // -1 ç›¸åŒ | 0 ç›¸ç¦» | 1 å¤–åˆ‡ | 2 ç›¸äº¤ | 3 å†…åˆ‡ | 4 å†…å«
     int relation(const Circle &a) const
     {
         if (*this==a) return -1;
@@ -323,7 +323,7 @@ struct Circle
         return 2;
     }
 
-    // Ö±ÏßÓëÔ²µÄ½»µã
+    // ç›´çº¿ä¸åœ†çš„äº¤ç‚¹
     vector<Point> inter(const Line &l) const
     {
         const T d=l.dis(c);
@@ -335,7 +335,7 @@ struct Circle
         return vector<Point>{p-(l.v/l.v.len())*k,p+(l.v/l.v.len())*k};
     }
 
-    // Ô²ÓëÔ²½»µã
+    // åœ†ä¸åœ†äº¤ç‚¹
     vector<Point> inter(const Circle &a) const
     {
         const T d=c.dis(a.c);
@@ -351,7 +351,7 @@ struct Circle
         return vector<Point>{c+e.rot(costh,-sinth),c+e.rot(costh,sinth)};
     }
 
-    // Ô²ÓëÔ²½»Ãæ»ı
+    // åœ†ä¸åœ†äº¤é¢ç§¯
     T inter_area(const Circle &a) const
     {
         const T d=c.dis(a.c);
@@ -365,7 +365,7 @@ struct Circle
         return r*r*(th1-costh1*sinth1)+a.r*a.r*(th2-costh2*sinth2);
     }
 
-    // ¹ıÔ²ÍâÒ»µãÔ²µÄÇĞÏß
+    // è¿‡åœ†å¤–ä¸€ç‚¹åœ†çš„åˆ‡çº¿
     vector<Line> tangent(const Point &a) const
     {
         const int t=is_in(a);
@@ -381,7 +381,7 @@ struct Circle
         return vector<Line>{{a,t1-a},{a,t2-a}};
     }
 
-    // Á½Ô²µÄ¹«ÇĞÏß
+    // ä¸¤åœ†çš„å…¬åˆ‡çº¿
     vector<Line> tangent(const Circle &a) const
     {
         const int t=relation(a);
@@ -411,7 +411,7 @@ struct Circle
         return lines;
     }
 
-    // Ô²µÄ·´Ñİ
+    // åœ†çš„åæ¼”
     // auto result = circle.inverse(line);
     // if (std::holds_alternative<Circle>(result))
     // Circle c = std::get<Circle>(result);
@@ -440,7 +440,7 @@ struct Circle
     }
 };
 
-// Ô²Óë¶à±ßĞÎÃæ»ı½»
+// åœ†ä¸å¤šè¾¹å½¢é¢ç§¯äº¤
 T area_inter(const Circle &circ,const Polygon &poly)
 {
     const auto cal=[](const Circle &circ,const Point &a,const Point &b)
@@ -491,8 +491,8 @@ T area_inter(const Circle &circ,const Polygon &poly)
     return ans;
 }
 
-// µã¼¯µÄÍ¹°ü
-// Andrew Ëã·¨£¬¸´ÔÓ¶È O(nlogn)
+// ç‚¹é›†çš„å‡¸åŒ…
+// Andrew ç®—æ³•ï¼Œå¤æ‚åº¦ O(nlogn)
 Convex convexhull(vector<Point> p)
 {
     vector<Point> st;
@@ -519,13 +519,13 @@ Convex convexhull(vector<Point> p)
     return Convex{st};
 }
 
-// °ëÆ½Ãæ½»
-// ÅÅĞòÔöÁ¿·¨£¬¸´ÔÓ¶È O(nlogn)
-// ÊäÈëÓë·µ»ØÖµ¶¼ÊÇÓÃÖ±Ïß±íÊ¾µÄ°ëÆ½Ãæ¼¯ºÏ
+// åŠå¹³é¢äº¤
+// æ’åºå¢é‡æ³•ï¼Œå¤æ‚åº¦ O(nlogn)
+// è¾“å…¥ä¸è¿”å›å€¼éƒ½æ˜¯ç”¨ç›´çº¿è¡¨ç¤ºçš„åŠå¹³é¢é›†åˆ
 vector<Line> halfinter(vector<Line> l, const T lim=1e9)
 {
     const auto check=[](const Line &a,const Line &b,const Line &c){return a.toleft(b.inter(c))<0;};
-    // ÎŞ¾«¶ÈÎó²îµÄ·½·¨£¬µ«×¢ÒâÈ¡Öµ·¶Î§»áÀ©´óµ½Èı´Î·½
+    // æ— ç²¾åº¦è¯¯å·®çš„æ–¹æ³•ï¼Œä½†æ³¨æ„å–å€¼èŒƒå›´ä¼šæ‰©å¤§åˆ°ä¸‰æ¬¡æ–¹
     /*const auto check=[](const Line &a,const Line &b,const Line &c)
     {
         const Point p=a.v*(b.v^c.v),q=b.p*(b.v^c.v)+b.v*(c.v^(b.p-c.p))-a.p*(b.v^c.v);
@@ -548,9 +548,9 @@ vector<Line> halfinter(vector<Line> l, const T lim=1e9)
     return vector<Line>(q.begin(),q.end());
 }
 
-// µã¼¯ĞÎ³ÉµÄ×îĞ¡×î´óÈı½ÇĞÎ
-// ¼«½ÇĞòÉ¨ÃèÏß£¬¸´ÔÓ¶È O(n^2logn)
-// ×î´óÈı½ÇĞÎÎÊÌâ¿ÉÒÔÊ¹ÓÃÍ¹°üÓëĞı×ª¿¨¿Ç×öµ½ O(n^2)
+// ç‚¹é›†å½¢æˆçš„æœ€å°æœ€å¤§ä¸‰è§’å½¢
+// æè§’åºæ‰«æçº¿ï¼Œå¤æ‚åº¦ O(n^2logn)
+// æœ€å¤§ä¸‰è§’å½¢é—®é¢˜å¯ä»¥ä½¿ç”¨å‡¸åŒ…ä¸æ—‹è½¬å¡å£³åšåˆ° O(n^2)
 pair<T,T> minmax_triangle(const vector<Point> &vec)
 {
     if (vec.size()<=2) return {0,0};
@@ -588,8 +588,8 @@ pair<T,T> minmax_triangle(const vector<Point> &vec)
     return {minans,maxans};
 }
 
-// Æ½Ãæ×î½üµã¶Ô
-// É¨ÃèÏß£¬¸´ÔÓ¶È O(nlogn)
+// å¹³é¢æœ€è¿‘ç‚¹å¯¹
+// æ‰«æçº¿ï¼Œå¤æ‚åº¦ O(nlogn)
 T closest_pair(vector<Point> points)
 {
     sort(points.begin(),points.end());
@@ -609,12 +609,12 @@ T closest_pair(vector<Point> points)
     return ans;
 }
 
-// ÅĞ¶Ï¶àÌõÏß¶ÎÊÇ·ñÓĞ½»µã
-// É¨ÃèÏß£¬¸´ÔÓ¶È O(nlogn)
+// åˆ¤æ–­å¤šæ¡çº¿æ®µæ˜¯å¦æœ‰äº¤ç‚¹
+// æ‰«æçº¿ï¼Œå¤æ‚åº¦ O(nlogn)
 bool segs_inter(const vector<Segment> &segs)
 {
     if (segs.empty()) return false;
-    using seq_t=tuple<T,int,Segment>;  // x×ø±ê ³öÈëµã Ïß¶Î
+    using seq_t=tuple<T,int,Segment>;  // xåæ ‡ å‡ºå…¥ç‚¹ çº¿æ®µ
     const auto seqcmp=[](const seq_t &u, const seq_t &v)
     {
         const auto [u0,u1,u2]=u;
@@ -656,9 +656,9 @@ bool segs_inter(const vector<Segment> &segs)
     return false;
 }
 
-// ¶à±ßĞÎÃæ»ı²¢
-// ÂÖÀª»ı·Ö£¬¸´ÔÓ¶È O(n^2logn)£¬nÎª±ßÊı
-// ans[i] ±íÊ¾±»ÖÁÉÙ¸²¸ÇÁË i+1 ´ÎµÄÇøÓòµÄÃæ»ı
+// å¤šè¾¹å½¢é¢ç§¯å¹¶
+// è½®å»“ç§¯åˆ†ï¼Œå¤æ‚åº¦ O(n^2logn)ï¼Œnä¸ºè¾¹æ•°
+// ans[i] è¡¨ç¤ºè¢«è‡³å°‘è¦†ç›–äº† i+1 æ¬¡çš„åŒºåŸŸçš„é¢ç§¯
 vector<T> area_union(const vector<Polygon> &polys)
 {
     const size_t siz=polys.size();
@@ -728,9 +728,9 @@ vector<T> area_union(const vector<Polygon> &polys)
     return ans;
 }
 
-// Ô²Ãæ»ı²¢
-// ÂÖÀª»ı·Ö£¬¸´ÔÓ¶È O(n^2logn)
-// ans[i] ±íÊ¾±»ÖÁÉÙ¸²¸ÇÁË i+1 ´ÎµÄÇøÓòµÄÃæ»ı
+// åœ†é¢ç§¯å¹¶
+// è½®å»“ç§¯åˆ†ï¼Œå¤æ‚åº¦ O(n^2logn)
+// ans[i] è¡¨ç¤ºè¢«è‡³å°‘è¦†ç›–äº† i+1 æ¬¡çš„åŒºåŸŸçš„é¢ç§¯
 vector<T> area_union(const vector<Circle> &circs)
 {
     const size_t siz=circs.size();

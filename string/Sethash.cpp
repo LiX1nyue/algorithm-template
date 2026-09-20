@@ -4,8 +4,6 @@
 using namespace std;
 typedef unsigned long long ULL;
 
-
-//ÎÞÐò¹þÏ£
 struct Sethash{
 	int n;
 	vector<int> a;

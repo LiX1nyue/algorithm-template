@@ -1,0 +1,210 @@
+\documentclass[12pt, UTF8]{ctexart}
+\usepackage[a4paper, margin=1.8cm]{geometry}
+\usepackage{fontspec}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{hyperref}
+% DejaVu Sans Mono 覆盖 ∨ ⊕ ∈ 等数学符号，避免缺字警告
+\setmonofont{DejaVu Sans Mono}
+\hypersetup{colorlinks=true, linkcolor=black, pdftitle={算法模板},
+            pdfauthor={李欣悦}}
+
+\definecolor{keyword}{RGB}{0,0,255}
+\definecolor{comment}{RGB}{0,128,0}
+\definecolor{string}{RGB}{170,0,0}
+\definecolor{lightgray}{RGB}{200,200,200}
+
+\lstset{
+  language=C++,
+  basicstyle=\ttfamily\footnotesize,
+  keywordstyle=\color{keyword}\bfseries,
+  commentstyle=\color{comment}\itshape,
+  stringstyle=\color{string},
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  frame=lines,
+  rulecolor=\color{lightgray},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=4,
+  showstringspaces=false,
+  columns=flexible,
+  keepspaces=true,
+  xleftmargin=2em,
+}
+
+\title{\textbf{算法竞赛模板集}\\ \large C++ Algorithm Templates}
+\author{李欣悦}
+\date{\today}
+
+\begin{document}
+\maketitle
+\tableofcontents
+\newpage
+\section{数据结构 Data Structure}
+
+\subsection{dsu}\hfill\normalsize\textit{38 行}
+
+\lstinputlisting{code/data_structure_dsu.cpp}
+
+\subsection{Fenwick}\hfill\normalsize\textit{47 行}
+
+\lstinputlisting{code/data_structure_Fenwick.cpp}
+
+\subsection{modui}\hfill\normalsize\textit{51 行}
+
+\lstinputlisting{code/data_structure_modui.cpp}
+
+\subsection{SegTree}\hfill\normalsize\textit{98 行}
+
+\lstinputlisting{code/data_structure_SegTree.cpp}
+
+\subsection{Sparse Table}\hfill\normalsize\textit{33 行}
+
+\lstinputlisting{code/data_structure_Sparse_Table.cpp}
+
+\subsection{Twoheaps}\hfill\normalsize\textit{135 行}
+
+\lstinputlisting{code/data_structure_Twoheaps.cpp}
+
+\section{图论 Graph}
+
+\subsection{Centroid\_Decomposition}\hfill\normalsize\textit{94 行}
+
+\lstinputlisting{code/graph_Centroid_Decomposition.cpp}
+
+\subsection{dijkstra}\hfill\normalsize\textit{32 行}
+
+\lstinputlisting{code/graph_dijkstra.cpp}
+
+\subsection{Dsu\_on\_tree}\hfill\normalsize\textit{90 行}
+
+\lstinputlisting{code/graph_Dsu_on_tree.cpp}
+
+\subsection{Dynamic diameter}\hfill\normalsize\textit{205 行}
+
+\lstinputlisting{code/graph_Dynamic_diameter.cpp}
+
+\subsection{EBCC}\hfill\normalsize\textit{75 行}
+
+\lstinputlisting{code/graph_EBCC.cpp}
+
+\subsection{flow\_dinic}\hfill\normalsize\textit{126 行}
+
+\lstinputlisting{code/graph_flow_dinic.cpp}
+
+\subsection{floyd}\hfill\normalsize\textit{16 行}
+
+\lstinputlisting{code/graph_floyd.cpp}
+
+\subsection{Hierholzer}\hfill\normalsize\textit{241 行}
+
+\lstinputlisting{code/graph_Hierholzer.cpp}
+
+\subsection{LCA-Euler}\hfill\normalsize\textit{71 行}
+
+\lstinputlisting{code/graph_LCA-Euler.cpp}
+
+\subsection{LCA-jump}\hfill\normalsize\textit{62 行}
+
+\lstinputlisting{code/graph_LCA-jump.cpp}
+
+\subsection{MST}\hfill\normalsize\textit{48 行}
+
+\lstinputlisting{code/graph_MST.cpp}
+
+\subsection{SCC}\hfill\normalsize\textit{68 行}
+
+\lstinputlisting{code/graph_SCC.cpp}
+
+\subsection{SegGragh}\hfill\normalsize\textit{61 行}
+
+\lstinputlisting{code/graph_SegGragh.cpp}
+
+\subsection{topsort}\hfill\normalsize\textit{48 行}
+
+\lstinputlisting{code/graph_topsort.cpp}
+
+\subsection{TwoSAT}\hfill\normalsize\textit{128 行}
+
+\lstinputlisting{code/graph_TwoSAT.cpp}
+
+\subsection{VBCC}\hfill\normalsize\textit{58 行}
+
+\lstinputlisting{code/graph_VBCC.cpp}
+
+\section{数学 Math}
+
+\subsection{comb}\hfill\normalsize\textit{40 行}
+
+\lstinputlisting{code/math_comb.cpp}
+
+\subsection{Diff2D}\hfill\normalsize\textit{28 行}
+
+\lstinputlisting{code/math_Diff2D.cpp}
+
+\subsection{Division block}\hfill\normalsize\textit{30 行}
+
+\lstinputlisting{code/math_Division_block.cpp}
+
+\subsection{EulerSieve}\hfill\normalsize\textit{39 行}
+
+\lstinputlisting{code/math_EulerSieve.cpp}
+
+\subsection{exgcd}\hfill\normalsize\textit{29 行}
+
+\lstinputlisting{code/math_exgcd.cpp}
+
+\subsection{frac}\hfill\normalsize\textit{32 行}
+
+\lstinputlisting{code/math_frac.cpp}
+
+\subsection{gauss}\hfill\normalsize\textit{65 行}
+
+\lstinputlisting{code/math_gauss.cpp}
+
+\subsection{Matrix}\hfill\normalsize\textit{33 行}
+
+\lstinputlisting{code/math_Matrix.cpp}
+
+\subsection{preprocess\_divisors}\hfill\normalsize\textit{41 行}
+
+\lstinputlisting{code/math_preprocess_divisors.cpp}
+
+\subsection{Ternary Search}\hfill\normalsize\textit{41 行}
+
+\lstinputlisting{code/math_Ternary_Search.cpp}
+
+\subsection{Xorbasis\_gauss}\hfill\normalsize\textit{78 行}
+
+\lstinputlisting{code/math_Xorbasis_gauss.cpp}
+
+\subsection{Xorbasis\_greedy}\hfill\normalsize\textit{52 行}
+
+\lstinputlisting{code/math_Xorbasis_greedy.cpp}
+
+\section{字符串 String}
+
+\subsection{Hash}\hfill\normalsize\textit{32 行}
+
+\lstinputlisting{code/string_Hash.cpp}
+
+\subsection{KMP}\hfill\normalsize\textit{35 行}
+
+\lstinputlisting{code/string_KMP.cpp}
+
+\subsection{Sethash}\hfill\normalsize\textit{48 行}
+
+\lstinputlisting{code/string_Sethash.cpp}
+
+\subsection{tire}\hfill\normalsize\textit{48 行}
+
+\lstinputlisting{code/string_tire.cpp}
+
+\section{其他 Others}
+
+\subsection{geometry}\hfill\normalsize\textit{812 行}
+
+\lstinputlisting{code/._geometry.cpp}
+
+\end{document}

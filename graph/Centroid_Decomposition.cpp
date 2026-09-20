@@ -60,8 +60,8 @@ void solve(){
 		root = u;
 		getroot(getroot,u,-1);		
 		
-		/*�ڴ˴���д����μ���𰸴���*/
-		/*root Ϊ����*/	
+		/*在此处填写点分治计算答案代码*/
+		/*root 为重心*/	
 		for(auto [d,i] : v[root]){
 			if(!done[i]){
 				dfs(dfs,i,root);

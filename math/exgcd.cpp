@@ -5,7 +5,7 @@ using namespace std;
 
 struct Exgcd{
 	int a,b,k;
-	//ÀàÄÚÃ»ÓĞÅĞ¶ÏÎŞ½â£¬×¢ÒâÔÚÍâÃæÅĞ¶ÏÊÇ·ñÓĞ k % __gcd(a,b) == 0
+	//ç±»å†…æ²¡æœ‰åˆ¤æ–­æ— è§£ï¼Œæ³¨æ„åœ¨å¤–é¢åˆ¤æ–­æ˜¯å¦æœ‰ k % __gcd(a,b) == 0
 	Exgcd(int a,int b,int k):a(a),b(b),k(k){}
 	array<__int128,4> work(){
 		__int128 g = __gcd(a,b);

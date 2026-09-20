@@ -24,7 +24,7 @@ struct Dinic {
 		it.assign(n, 0);
 	}
 	
-	// ¼ÓÒ»Ìõ u -> v£¬ÈİÁ¿Îª cap µÄÓĞÏò±ß
+	// åŠ ä¸€æ¡ u -> vï¼Œå®¹é‡ä¸º cap çš„æœ‰å‘è¾¹
 	void addEdge(int u, int v, T cap) {
 		g[u].push_back({v, g[v].size(), cap});
 		g[v].push_back({u, g[u].size() - 1, 0});
@@ -65,7 +65,7 @@ struct Dinic {
 		return 0;
 	}
 	
-	// Çó s µ½ t µÄ×î´óÁ÷
+	// æ±‚ s åˆ° t çš„æœ€å¤§æµ
 	T maxFlow(int s, int t) {
 		T flow = 0;
 		while (bfs(s, t)) {
@@ -77,7 +77,7 @@ struct Dinic {
 		return flow;
 	}
 	
-	// ×î´óÁ÷½áÊøºó£¬·µ»Ø´Ó s ³ö·¢ÔÚ²ĞÁ¿ÍøÂçÖĞ¿É´ïµÄµã¼¯
+	// æœ€å¤§æµç»“æŸåï¼Œè¿”å›ä» s å‡ºå‘åœ¨æ®‹é‡ç½‘ç»œä¸­å¯è¾¾çš„ç‚¹é›†
 	vector<bool> minCutSide(int s) {
 		vector<bool> vis(n, false);
 		queue<int> q;
@@ -96,7 +96,7 @@ struct Dinic {
 		return vis;
 	}
 	
-	// µ¼³ö²ĞÁ¿ÍøÂç£º (u, v, residual_cap)
+	// å¯¼å‡ºæ®‹é‡ç½‘ç»œï¼š (u, v, residual_cap)
 	vector<tuple<int,int,T>> residualNetwork() const {
 		vector<tuple<int,int,T>> res;
 		for (int u = 1; u < n; ++u) {

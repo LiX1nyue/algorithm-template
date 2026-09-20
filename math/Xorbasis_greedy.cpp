@@ -31,6 +31,17 @@ struct Xorbasis{
 			}
 		}		
 	}
+
+	bool check(int x){
+    	for(int i = bit-1; i >= 0; i --){
+        	if(x >> i & 1){
+            	if(idx[i] == -1) return false;
+            	x ^= idx[i];
+        	}
+    	}
+    	return x == 0;
+	}
+
 	int getbit(int x){
 		return idx[x];
 	}

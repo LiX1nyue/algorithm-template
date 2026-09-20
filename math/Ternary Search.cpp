@@ -11,11 +11,11 @@ void solve(){
 	while(r - l > 1e-9) {
 		double lmid = l + (r - l) / 3, rmid = r - (r - l) / 3;
 
-		// Çó°¼º¯ÊıµÄ¼«Ğ¡Öµ
+		// æ±‚å‡¹å‡½æ•°çš„æå°å€¼
 		if(check(lmid) <= check(rmid)) r = rmid;
 		else l = lmid;
 
-         // ÇóÍ¹º¯ÊıµÄ¼«´óÖµ
+         // æ±‚å‡¸å‡½æ•°çš„æå¤§å€¼
         if(check(lmid) <= check(rmid)) l = lmid;
         else r = rmid;
 		
@@ -28,12 +28,12 @@ void solve(){
 	while(l < r){
 		int lmid = l + (r-l)/3, rmid = r - (r-l)/3;
 
-		//Èç¹ûÊÇÖĞ¼äÍ¹µÄµ¥·åº¯ÊıÊÇ<ºÅ£¬ÖĞ¼ä°¼ÊÇ>ºÅ¡£
-		//Çó°¼º¯ÊıµÄ¼«Ğ¡Öµ
+		//å¦‚æœæ˜¯ä¸­é—´å‡¸çš„å•å³°å‡½æ•°æ˜¯<å·ï¼Œä¸­é—´å‡¹æ˜¯>å·ã€‚
+		//æ±‚å‡¹å‡½æ•°çš„æå°å€¼
 		if(check(lmid) > check(rmid)) l = lmid + 1; 
 		else r = rmid - 1;
 
-		//ÇóÍ¹º¯ÊıµÄ¼«´óÖµ
+		//æ±‚å‡¸å‡½æ•°çš„æå¤§å€¼
 		if(check(lmid) < check(rmid)) l = lmid + 1;
 		else r = rmid - 1;
 	}

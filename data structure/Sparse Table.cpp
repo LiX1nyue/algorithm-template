@@ -14,7 +14,7 @@ struct ST{
     }
 
     int cal(int x,int y){
-        return __gcd(x,y); //¿É»»Îª__gcd(x,y) min(x,y)
+        return __gcd(x,y);
     }
 
     void work(){

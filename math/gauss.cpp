@@ -18,7 +18,7 @@ struct Gauss {
 			int sel = row;
 			
 			while (sel <= m && !a[sel][col]) sel++;
-			if (sel > m) continue; // втси╠Да©
+			if (sel > m) continue; // Х┤╙Г■╠Е▐≤И┤▐
 			
 			swap(a[sel], a[row]);
 			where[col] = row;
@@ -32,11 +32,11 @@ struct Gauss {
 		}
 	}
 	
-	// нч╫Б╥╣╩ь {}
-	// сп╫Б╥╣╩ь╢П╟╦ё╛втси╠Да©н╙ -1
+	// Ф≈═Х╖ёХ©■Е⌡· {}
+	// Ф°┴Х╖ёХ©■Е⌡·Г╜■Ф║┬О╪▄Х┤╙Г■╠Е▐≤И┤▐Д╦╨ -1
 	vector<int> work() {
 		elimination();
-		// еп╤онч╫Бё╨0 = 1
+		// Е┬╓Ф√╜Ф≈═Х╖ёО╪ 0 = 1
 		for (int i = 1; i <= m; i++) {
 			bool all0 = true;
 			for (int j = 1; j <= n; j++) {
@@ -54,7 +54,7 @@ struct Gauss {
 			if (where[i] != -1) {
 				ans[i] = a[where[i]][0];
 			}else{
-				//втси╠Да©х╚иХн╙0ё╛╣ц╣╫р╩вИль╫Б║ё
+				//Х┤╙Г■╠Е▐≤И┤▐Е┘╗Х╝╬Д╦╨0О╪▄Е╬≈Е┬╟Д╦─Г╩└Г┴╧Х╖ёЦ─┌
 				ans[i] = 0;
 			}
 		}
