@@ -94,4 +94,24 @@ struct SegTree{
         return query(np << 1,l,r) + query(np << 1 | 1,l,r);
     }
 
+    bool check(Info x){
+    }
+
+    int max_right(int np,int l){
+        Info cur = {l,l,LLONG_MIN,l};
+        auto find = [&](auto &&self,int p) -> int{
+            if(seg[p].r < l) return l - 1;
+            if(seg[p].l >= l && check(cur + seg[p])){
+                cur = cur + seg[p];
+                return seg[p].r;
+            }
+            if(seg[p].l == seg[p].r) return seg[p].l - 1;
+            push(p);
+            int left = self(self,p << 1);
+            if(left < seg[p << 1].r) return left;
+            return self(self,p << 1 | 1);
+        };
+        return find(find,1);
+    }
+
 };
